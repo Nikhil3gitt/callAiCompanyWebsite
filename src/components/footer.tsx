@@ -1,11 +1,10 @@
-import Link from "next/link"
-import { Github, Linkedin, Youtube } from "lucide-react"
+﻿import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
+import { Logo } from "@/components/logo"
 
 const footerLinks = {
   company: [
-    { name: "About", href: "/about" },
     { name: "Process", href: "/process" },
     { name: "Projects", href: "/projects" },
     { name: "Contact", href: "/contact" },
@@ -20,39 +19,18 @@ const footerLinks = {
   ],
 }
 
-const socialLinks = [
-  { name: "LinkedIn", href: "#", icon: Linkedin },
-  { name: "GitHub", href: "#", icon: Github },
-  { name: "YouTube", href: "#", icon: Youtube },
-]
-
 export function Footer() {
   return (
     <footer className="border-t bg-background">
       <div className="container py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent" />
-              <span className="text-xl font-bold font-heading">callAI</span>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              AI that moves your business forward. From automation to decision-making—tailored intelligence for startups to enterprises.
+            <Logo href="/" size={44} />
+            <p className="text-sm text-muted-foreground max-w-sm">
+              AI that moves your business forward. We design practical automation and intelligence for real outcomes.
             </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((item) => (
-                <Button key={item.name} variant="ghost" size="icon" asChild>
-                  <Link href={item.href}>
-                    <item.icon className="h-4 w-4" />
-                    <span className="sr-only">{item.name}</span>
-                  </Link>
-                </Button>
-              ))}
-            </div>
           </div>
 
-          {/* Company */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold">Company</h3>
             <ul className="space-y-2">
@@ -69,7 +47,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold">Resources</h3>
             <ul className="space-y-2">
@@ -86,11 +63,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold">Stay Updated</h3>
             <p className="text-sm text-muted-foreground">
-              Get the latest insights on AI and automation.
+              Get the latest insights on AI adoption and automation.
             </p>
             <div className="space-y-2">
               <input
@@ -107,7 +83,8 @@ export function Footer() {
 
         <div className="mt-8 border-t pt-8">
           <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-            <p className="text-sm text-muted-foreground">
+            <Logo href="/" size={32} showWordmark={false} className="md:hidden" />
+            <p className="text-sm text-muted-foreground text-center md:text-left">
               © 2024 callAI. All rights reserved.
             </p>
             <div className="flex space-x-6">
@@ -127,4 +104,3 @@ export function Footer() {
     </footer>
   )
 }
-

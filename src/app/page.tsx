@@ -1,14 +1,17 @@
-import { Hero } from "@/components/hero"
+﻿import { Hero } from "@/components/hero"
 import { ValuePropCard } from "@/components/value-prop-card"
 import { ProjectCard } from "@/components/project-card"
-import { 
-  Zap, 
-  Brain, 
-  Heart, 
+import {
+  Zap,
+  Brain,
+  Heart,
   Rocket,
+  Search,
+  Palette,
+  RefreshCw,
   ArrowRight,
   Star,
-  Quote
+  Quote,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -45,28 +48,31 @@ const valueProps = [
 const testimonials = [
   {
     id: "1",
-    name: "Sarah Chen",
-    role: "CTO",
-    company: "TechFlow",
-    content: "callAI transformed our customer support. We went from 4-hour response times to instant, accurate answers. Our team can now focus on complex issues while AI handles the routine.",
-    avatar: null
+    name: "CTO, EcoDelicious",
+    role: "",
+    company: "",
+    content:
+      "callAI transformed our customer support. We went from 4-hour response times to instant, accurate answers. Our team can now focus on complex issues while AI handles the routine.",
+    avatar: null,
   },
   {
-    id: "2", 
-    name: "Marcus Rodriguez",
-    role: "Operations Director",
-    company: "RetailMax",
-    content: "The demand forecasting model has been a game-changer. We've reduced stockouts by 30% and increased revenue by 15%. The ROI was evident within the first quarter.",
-    avatar: null
+    id: "2",
+    name: "VP, Glamit",
+    role: "",
+    company: "",
+    content:
+      "The demand forecasting model has been a game-changer. We've reduced stockouts by 30% and increased revenue by 15%. The ROI was evident within the first quarter.",
+    avatar: null,
   },
   {
     id: "3",
-    name: "Emily Watson",
-    role: "VP of Finance",
-    company: "FinanceCorp",
-    content: "Invoice automation saved us 20 hours per week. The accuracy is incredible, and it integrates seamlessly with our existing systems. Highly recommend callAI's approach.",
-    avatar: null
-  }
+    name: "VP of Finance, Joy N Joy",
+    role: "",
+    company: "",
+    content:
+      "Invoice automation saved us 20 hours per week. The accuracy is incredible, and it integrates seamlessly with our existing systems. Highly recommend callAI's approach.",
+    avatar: null,
+  },
 ]
 
 const processSteps = [
@@ -74,26 +80,26 @@ const processSteps = [
     id: "1",
     title: "Discover",
     description: "We analyze your business processes and identify AI opportunities.",
-    icon: "🔍"
+    icon: Search,
   },
   {
-    id: "2", 
+    id: "2",
     title: "Design",
     description: "Custom AI solutions tailored to your specific needs and goals.",
-    icon: "🎨"
+    icon: Palette,
   },
   {
     id: "3",
     title: "Deliver",
     description: "Rapid deployment with comprehensive testing and validation.",
-    icon: "🚀"
+    icon: Rocket,
   },
   {
     id: "4",
     title: "Iterate",
     description: "Continuous improvement based on real-world performance data.",
-    icon: "🔄"
-  }
+    icon: RefreshCw,
+  },
 ]
 
 export default function HomePage() {
@@ -174,15 +180,19 @@ export default function HomePage() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {processSteps.map((step, index) => (
-                <Card key={step.id} className="text-center card-hover">
-                  <CardContent className="p-8">
-                    <div className="text-4xl mb-4">{step.icon}</div>
-                    <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                    <p className="text-muted-foreground">{step.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
+              {processSteps.map((step, index) => {
+                const Icon = step.icon
+
+                return (
+                  <Card key={step.id} className="text-center card-hover">
+                    <CardContent className="p-8">
+                      <Icon className="h-10 w-10 text-primary mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
+                      <p className="text-muted-foreground">{step.description}</p>
+                    </CardContent>
+                  </Card>
+                )
+              })}
             </div>
             
             <div className="text-center mt-12">
@@ -206,27 +216,33 @@ export default function HomePage() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
-                <Card key={testimonial.id} className="card-hover">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    <Quote className="h-8 w-8 text-primary mb-4" />
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      "{testimonial.content}"
-                    </p>
-                    <div>
-                      <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {testimonial.role}, {testimonial.company}
+              {testimonials.map((testimonial) => {
+                const attribution = [testimonial.role, testimonial.company].filter(Boolean).join(", ")
+
+                return (
+                  <Card key={testimonial.id} className="card-hover">
+                    <CardContent className="p-6">
+                      <div className="flex items-center mb-4">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        ))}
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      <Quote className="h-8 w-8 text-primary mb-4" />
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
+                        "{testimonial.content}"
+                      </p>
+                      <div>
+                        <div className="font-semibold">{testimonial.name}</div>
+                        {attribution && (
+                          <div className="text-sm text-muted-foreground">
+                            {attribution}
+                          </div>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -258,3 +274,8 @@ export default function HomePage() {
     </div>
   )
 }
+
+
+
+
+

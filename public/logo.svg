@@ -1,0 +1,15 @@
+﻿<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="callaiGradient" x1="128" y1="96" x2="384" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5B5FF2" />
+      <stop offset="1" stop-color="#B73BE1" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(64 64)">
+    <path d="M96 128L224 64L352 128L224 192L96 128Z" fill="url(#callaiGradient)"/>
+    <path d="M96 256L224 192L352 256L224 320L96 256Z" fill="url(#callaiGradient)" opacity="0.9"/>
+    <path d="M224 64L224 192L352 256L352 128L224 64Z" fill="url(#callaiGradient)" opacity="0.75"/>
+    <path d="M128 160L160 176V208L128 192V160Z" fill="url(#callaiGradient)"/>
+    <path d="M160 208L192 224V256L160 240V208Z" fill="url(#callaiGradient)" opacity="0.85"/>
+  </g>
+</svg>

@@ -6,19 +6,12 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { motion } from "framer-motion"
+import { Mail, MapPin, Send, CheckCircle, Calendar, Clock } from "lucide-react"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  CheckCircle,
-  Calendar,
-  Clock,
-} from "lucide-react"
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -27,7 +20,9 @@ const contactFormSchema = z.object({
   role: z.string().min(2, "Role is required"),
   message: z.string().min(10, "Message must be at least 10 characters"),
   budget: z.string().min(1, "Please select a budget range"),
-  consent: z.boolean().refine((val) => val === true, "You must agree to our privacy policy"),
+  consent: z
+    .boolean()
+    .refine((val) => val === true, "You must agree to our privacy policy"),
 })
 
 const scheduleFormSchema = z.object({
@@ -61,20 +56,14 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    details: "hello@callai.com",
-    description: "We'll respond within 24 hours",
-  },
-  {
-    icon: Phone,
-    title: "Phone",
-    details: "+1 (555) 123-4567",
-    description: "Mon-Fri, 9AM-6PM EST",
+    details: "contact.callaiservice@gmail.com",
+    description: "We will respond within 24 hours",
   },
   {
     icon: MapPin,
-    title: "Office",
-    details: "San Francisco, CA",
-    description: "Remote-first, global team",
+    title: "Address",
+    details: "Toronto, Canada",
+    description: "Remote-first team anchored in the Toronto tech community",
   },
 ]
 
@@ -127,15 +116,15 @@ export default function ContactPage() {
       })
 
       if (!response.ok) {
-        const result = await response.json().catch(() => ({}))
-        throw new Error(result?.message || "Failed to send message")
+        throw new Error("Something went wrong. Please try again.")
       }
 
       setIsSubmitted(true)
       reset()
     } catch (error) {
-      console.error("Contact form submission failed", error)
-      setErrorMessage("We couldn't send your message right now. Please try again or email us directly.")
+      setErrorMessage(
+        error instanceof Error ? error.message : "Unexpected error occurred"
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -156,59 +145,45 @@ export default function ContactPage() {
       })
 
       if (!response.ok) {
-        const result = await response.json().catch(() => ({}))
-        throw new Error(result?.message || "Failed to schedule meeting")
+        throw new Error("Unable to schedule right now. Please try again later.")
       }
 
       setScheduleSuccess(true)
-      resetSchedule({ callType: callTypeOptions[0], name: "", email: "", date: "", time: "", notes: "" })
+      resetSchedule()
     } catch (error) {
-      console.error("Scheduling request failed", error)
-      setScheduleError("We couldn't schedule the meeting. Please try again or email us directly.")
+      setScheduleError(
+        error instanceof Error ? error.message : "Unexpected error occurred"
+      )
     } finally {
       setIsScheduling(false)
     }
   }
 
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center max-w-md mx-auto"
-        >
-          <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="h-8 w-8 text-green-600" />
-          </div>
-          <h1 className="text-3xl font-bold mb-4">Thank You!</h1>
-          <p className="text-muted-foreground mb-6">
-            Your message has been sent successfully. We'll get back to you within 24 hours.
-          </p>
-          <Button onClick={() => setIsSubmitted(false)}>Send Another Message</Button>
-        </motion.div>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-surface-dark via-background to-surface-dark">
-        <div className="container text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading mb-6">
-            Let's <span className="gradient-text">Connect</span>
-          </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Ready to transform your business with AI? Let's discuss your project and explore how we can help you achieve your goals.
-          </p>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mx-auto text-center space-y-6"
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading mb-6">
+              Contact <span className="gradient-text">callAI</span>
+            </h1>
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              Let&apos;s build the future of your business together. Reach out and we&apos;ll tailor an engagement to your goals.
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              We keep it simple. Send us a note or schedule a call.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      <div className="container section-padding">
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8">
-          {/* Contact Form */}
+      <section className="section-padding">
+        <div className="container grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-10">
           <div className="space-y-6">
             <Card>
               <CardHeader>
@@ -219,79 +194,104 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium">Name</label>
-                      <Input {...register("name")} placeholder="Your name" />
-                      {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>}
+                      <Input placeholder="Your name" {...register("name")} />
+                      {errors.name && (
+                        <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>
+                      )}
                     </div>
                     <div>
                       <label className="text-sm font-medium">Email</label>
-                      <Input {...register("email")} type="email" placeholder="you@company.com" />
-                      {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>}
+                      <Input
+                        type="email"
+                        placeholder="you@company.com"
+                        {...register("email")}
+                      />
+                      {errors.email && (
+                        <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>
+                      )}
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium">Company</label>
-                      <Input {...register("company")} placeholder="Company name" />
-                      {errors.company && <p className="text-sm text-red-600 mt-1">{errors.company.message}</p>}
+                      <Input placeholder="Company name" {...register("company")} />
+                      {errors.company && (
+                        <p className="text-sm text-red-600 mt-1">
+                          {errors.company.message}
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label className="text-sm font-medium">Role</label>
-                      <Input {...register("role")} placeholder="Your role" />
-                      {errors.role && <p className="text-sm text-red-600 mt-1">{errors.role.message}</p>}
+                      <Input placeholder="Your role" {...register("role")} />
+                      {errors.role && (
+                        <p className="text-sm text-red-600 mt-1">{errors.role.message}</p>
+                      )}
                     </div>
                   </div>
 
                   <div>
                     <label className="text-sm font-medium">Budget</label>
                     <select
-                      {...register("budget")}
                       className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground"
+                      {...register("budget")}
                     >
-                      <option value="">Select a budget range</option>
+                      <option value="" disabled>
+                        Select a range
+                      </option>
                       {budgetRanges.map((range) => (
                         <option key={range} value={range}>
                           {range}
                         </option>
                       ))}
                     </select>
-                    {errors.budget && <p className="text-sm text-red-600 mt-1">{errors.budget.message}</p>}
+                    {errors.budget && (
+                      <p className="text-sm text-red-600 mt-1">{errors.budget.message}</p>
+                    )}
                   </div>
 
                   <div>
-                    <label className="text-sm font-medium">Project Details</label>
+                    <label className="text-sm font-medium">How can we help?</label>
                     <Textarea
+                      rows={5}
+                      placeholder="Share your goals, challenges, and what success looks like"
                       {...register("message")}
-                      rows={4}
-                      placeholder="Describe your business challenges, goals, and how AI might help..."
                     />
-                    {errors.message && <p className="text-sm text-red-600 mt-1">{errors.message.message}</p>}
+                    {errors.message && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {errors.message.message}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="flex items-start space-x-2">
-                    <input {...register("consent")} type="checkbox" className="mt-1" />
-                    <label className="text-sm text-muted-foreground">
-                      I agree to the{" "}
-                      <a href="/privacy" className="text-primary hover:underline">
-                        Privacy Policy
-                      </a>{" "}
-                      and consent to being contacted about this project.
-                    </label>
-                  </div>
-                  {errors.consent && <p className="text-sm text-red-600">{errors.consent.message}</p>}
+                  <label className="flex items-start space-x-3 text-sm text-muted-foreground">
+                    <input type="checkbox" className="mt-1" {...register("consent")} />
+                    <span>
+                      I agree to the privacy policy and allow callAI to store and process my information.
+                    </span>
+                  </label>
+                  {errors.consent && (
+                    <p className="text-sm text-red-600">{errors.consent.message}</p>
+                  )}
 
                   {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
+                  {isSubmitted && (
+                    <p className="text-sm text-green-600">
+                      Thanks! We will be in touch within one business day.
+                    </p>
+                  )}
 
-                  <Button type="submit" disabled={isSubmitting} className="w-full" size="lg">
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
                     {isSubmitting ? (
                       <>
-                        <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin mr-2" />
+                        <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin mr-2" />
                         Sending...
                       </>
                     ) : (
                       <>
                         <Send className="h-4 w-4 mr-2" />
-                        Send Message
+                        Submit Inquiry
                       </>
                     )}
                   </Button>
@@ -300,12 +300,10 @@ export default function ContactPage() {
             </Card>
           </div>
 
-          {/* Contact Info & Calendar */}
           <div className="space-y-6">
-            {/* Contact Information */}
             <Card>
               <CardHeader>
-                <CardTitle>Get in Touch</CardTitle>
+                <CardTitle>How to reach us</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {contactInfo.map((info, index) => (
@@ -323,31 +321,48 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            {/* Calendar Booking */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Calendar className="h-5 w-5" />
-                  <span>Book a Call</span>
+                  <span>Book a call</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Prefer to schedule a call? Choose a time that works for you.
+                  Prefer to plan ahead? Choose a slot that works best for your team.
                 </p>
-                <form onSubmit={handleScheduleSubmit(onScheduleSubmit)} className="space-y-4">
+                <form
+                  onSubmit={handleScheduleSubmit(onScheduleSubmit)}
+                  className="space-y-4"
+                >
                   <div>
                     <label className="text-sm font-medium">Name</label>
-                    <Input {...registerSchedule("name")} placeholder="Your name" />
-                    {scheduleErrors.name && <p className="text-sm text-red-600 mt-1">{scheduleErrors.name.message}</p>}
+                    <Input
+                      {...registerSchedule("name")}
+                      placeholder="Your name"
+                    />
+                    {scheduleErrors.name && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {scheduleErrors.name.message}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label className="text-sm font-medium">Email</label>
-                    <Input {...registerSchedule("email")} type="email" placeholder="you@company.com" />
-                    {scheduleErrors.email && <p className="text-sm text-red-600 mt-1">{scheduleErrors.email.message}</p>}
+                    <Input
+                      {...registerSchedule("email")}
+                      type="email"
+                      placeholder="you@company.com"
+                    />
+                    {scheduleErrors.email && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {scheduleErrors.email.message}
+                      </p>
+                    )}
                   </div>
                   <div>
-                    <label className="text-sm font-medium">Call Type</label>
+                    <label className="text-sm font-medium">Call type</label>
                     <select
                       {...registerSchedule("callType")}
                       className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground"
@@ -358,36 +373,61 @@ export default function ContactPage() {
                         </option>
                       ))}
                     </select>
-                    {scheduleErrors.callType && <p className="text-sm text-red-600 mt-1">{scheduleErrors.callType.message}</p>}
+                    {scheduleErrors.callType && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {scheduleErrors.callType.message}
+                      </p>
+                    )}
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm font-medium">Preferred Date</label>
+                      <label className="text-sm font-medium">Preferred date</label>
                       <Input {...registerSchedule("date")} type="date" />
-                      {scheduleErrors.date && <p className="text-sm text-red-600 mt-1">{scheduleErrors.date.message}</p>}
+                      {scheduleErrors.date && (
+                        <p className="text-sm text-red-600 mt-1">
+                          {scheduleErrors.date.message}
+                        </p>
+                      )}
                     </div>
                     <div>
-                      <label className="text-sm font-medium">Preferred Time</label>
+                      <label className="text-sm font-medium">Preferred time</label>
                       <Input {...registerSchedule("time")} type="time" />
-                      {scheduleErrors.time && <p className="text-sm text-red-600 mt-1">{scheduleErrors.time.message}</p>}
+                      {scheduleErrors.time && (
+                        <p className="text-sm text-red-600 mt-1">
+                          {scheduleErrors.time.message}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm font-medium">Additional Notes</label>
+                    <label className="text-sm font-medium">Additional notes</label>
                     <Textarea
                       {...registerSchedule("notes")}
                       rows={3}
-                      placeholder="Share any context or topics you'd like to cover"
+                      placeholder="Share any context or topics you would like to cover"
                     />
-                    {scheduleErrors.notes && <p className="text-sm text-red-600 mt-1">{scheduleErrors.notes.message}</p>}
+                    {scheduleErrors.notes && (
+                      <p className="text-sm text-red-600 mt-1">
+                        {scheduleErrors.notes.message}
+                      </p>
+                    )}
                   </div>
 
-                  {scheduleError && <p className="text-sm text-red-600">{scheduleError}</p>}
+                  {scheduleError && (
+                    <p className="text-sm text-red-600">{scheduleError}</p>
+                  )}
                   {scheduleSuccess && (
-                    <p className="text-sm text-green-600">Thanks! We'll send a confirmation shortly.</p>
+                    <p className="text-sm text-green-600">
+                      Thanks! We will send a confirmation shortly.
+                    </p>
                   )}
 
-                  <Button type="submit" variant="outline" className="w-full" disabled={isScheduling}>
+                  <Button
+                    type="submit"
+                    variant="outline"
+                    className="w-full"
+                    disabled={isScheduling}
+                  >
                     {isScheduling ? (
                       <>
                         <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin mr-2" />
@@ -395,8 +435,8 @@ export default function ContactPage() {
                       </>
                     ) : (
                       <>
-                        <Calendar className="h-4 w-4 mr-2" />
-                        Schedule Meeting
+                        <Clock className="h-4 w-4 mr-2" />
+                        Schedule meeting
                       </>
                     )}
                   </Button>
@@ -404,24 +444,22 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            {/* Response Time */}
             <Card>
               <CardContent className="pt-6">
                 <div className="text-center">
                   <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-3">
                     <CheckCircle className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="font-semibold mb-2">Quick Response</h3>
+                  <h3 className="font-semibold mb-2">Quick response</h3>
                   <p className="text-sm text-muted-foreground">
-                    We typically respond to all inquiries within 24 hours, often much sooner.
+                    We typically respond to all inquiries within one business day.
                   </p>
                 </div>
               </CardContent>
             </Card>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
-

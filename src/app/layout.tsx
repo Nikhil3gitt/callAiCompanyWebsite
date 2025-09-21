@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import { Inter, Sora } from "next/font/google"
 import "./globals.css"
 
@@ -6,19 +6,21 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 })
 
-const sora = Sora({ 
+const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sora",
 })
 
+const description = "From automation to decision-making, we deliver tailored intelligence for startups and enterprises. Request your AI blueprint today."
+
 export const metadata: Metadata = {
   title: "callAI - AI that moves your business",
-  description: "From automation to decision-making—tailored intelligence for startups to enterprises. Request your AI blueprint today.",
+  description,
   keywords: ["AI", "automation", "machine learning", "business intelligence", "artificial intelligence"],
   authors: [{ name: "callAI" }],
   creator: "callAI",
@@ -29,6 +31,11 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL("https://callai.com"),
+  icons: {
+    icon: "/logo.svg",
+    shortcut: "/logo.svg",
+    apple: "/logo.svg",
+  },
   alternates: {
     canonical: "/",
   },
@@ -37,14 +44,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://callai.com",
     title: "callAI - AI that moves your business",
-    description: "From automation to decision-making—tailored intelligence for startups to enterprises.",
+    description,
     siteName: "callAI",
+    images: [
+      {
+        url: "/logo.svg",
+        width: 512,
+        height: 512,
+        alt: "callAI logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "callAI - AI that moves your business",
-    description: "From automation to decision-making—tailored intelligence for startups to enterprises.",
+    description,
     creator: "@callai",
+    images: ["/logo.svg"],
   },
   robots: {
     index: true,
