@@ -1,4 +1,4 @@
-﻿"use client"
+"use client"
 
 import * as React from "react"
 import { motion } from "framer-motion"
@@ -23,7 +23,7 @@ export function Hero() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-2xl animate-pulse delay-500" />
       </div>
 
-      <div className="relative z-10 container text-center">
+      <div className="relative z-10 container text-center pb-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -63,28 +63,28 @@ export function Hero() {
             </Button>
           </motion.div>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <button
-            onClick={scrollToContent}
-            className="flex flex-col items-center space-y-2 text-muted-foreground hover:text-primary transition-colors group"
-            aria-label="Scroll to content"
-          >
-            <span className="text-sm">Scroll to explore</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <ArrowDown className="h-5 w-5 group-hover:scale-110 transition-transform" />
-            </motion.div>
-          </button>
-        </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.5 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+      >
+        <button
+          onClick={scrollToContent}
+          className="flex flex-col items-center space-y-2 text-muted-foreground hover:text-primary transition-colors group"
+          aria-label="Scroll to content"
+        >
+          <span className="text-sm">Scroll to explore</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ArrowDown className="h-5 w-5 group-hover:scale-110 transition-transform" />
+          </motion.div>
+        </button>
+      </motion.div>
     </section>
   )
 }

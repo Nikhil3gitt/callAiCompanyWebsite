@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { ExternalLink } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 import { Project } from "@/types"
 
@@ -19,7 +20,7 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
     >
       <Card className="h-full card-hover group">
         <CardHeader className="pb-4">
@@ -55,10 +56,10 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
 
           <div className="flex gap-2 mt-4">
             <Button asChild className="flex-1">
-              <a href={`/projects/${project.slug}`}>
+              <Link href={`/projects/${project.slug}`}>
                 View Details
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </CardContent>
@@ -66,4 +67,3 @@ export function ProjectCard({ project, delay = 0 }: ProjectCardProps) {
     </motion.div>
   )
 }
-

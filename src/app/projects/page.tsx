@@ -4,7 +4,9 @@ import * as React from "react"
 import { useState } from "react"
 import { ProjectCard } from "@/components/project-card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import { projects, projectCategories } from "@/lib/projects"
+import Link from "next/link"
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
@@ -79,18 +81,16 @@ export default function ProjectsPage() {
             Every business is unique. Let's discuss your specific challenges and create a custom AI solution for you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
-            >
-              Start a Conversation
-            </a>
-            <a
-              href="/process"
-              className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-primary border border-primary rounded-lg hover:bg-primary/10 transition-colors"
-            >
-              Learn About Our Process
-            </a>
+            <Button asChild size="lg">
+              <Link href="/contact">
+                Start a Conversation
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/process">
+                Learn About Our Process
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

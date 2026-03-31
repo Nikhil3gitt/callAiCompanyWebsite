@@ -1,17 +1,14 @@
-﻿import Link from "next/link"
+import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
 
 const footerLinks = {
   company: [
-    { name: "Process", href: "/process" },
     { name: "Projects", href: "/projects" },
+    { name: "Process", href: "/process" },
+    { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
-  ],
-  resources: [
-    { name: "Privacy", href: "/privacy" },
-    { name: "Terms", href: "/terms" },
   ],
   legal: [
     { name: "Privacy Policy", href: "/privacy" },
@@ -20,6 +17,8 @@ const footerLinks = {
 }
 
 export function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="border-t bg-background">
       <div className="container py-12">
@@ -48,9 +47,9 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Resources</h3>
+            <h3 className="text-sm font-semibold">Legal</h3>
             <ul className="space-y-2">
-              {footerLinks.resources.map((item) => (
+              {footerLinks.legal.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
@@ -72,6 +71,7 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="Enter your email"
+                aria-label="Email address for newsletter"
                 className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
               />
               <Button size="sm" className="w-full">
@@ -83,9 +83,8 @@ export function Footer() {
 
         <div className="mt-8 border-t pt-8">
           <div className="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
-            <Logo href="/" size={32} showWordmark={false} className="md:hidden" />
             <p className="text-sm text-muted-foreground text-center md:text-left">
-              © 2024 callAI. All rights reserved.
+              © {currentYear} callAI. All rights reserved.
             </p>
             <div className="flex space-x-6">
               {footerLinks.legal.map((item) => (

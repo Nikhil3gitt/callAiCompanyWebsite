@@ -8,10 +8,6 @@ import {
   Target, 
   Eye, 
   Heart, 
-  Users, 
-  Award, 
-  TrendingUp,
-  ArrowRight,
   CheckCircle
 } from "lucide-react"
 import Link from "next/link"
@@ -34,34 +30,6 @@ const values = [
     title: "Values",
     description: "We are committed to ethical AI development, transparency, and delivering measurable value to our clients.",
     details: "Our core values guide everything we do: integrity, innovation, collaboration, and a relentless focus on client success."
-  }
-]
-
-const timeline = [
-  {
-    year: "2020",
-    title: "Company Founded",
-    description: "callAI was founded with a vision to make AI accessible to businesses of all sizes."
-  },
-  {
-    year: "2021", 
-    title: "First Major Client",
-    description: "Successfully deployed our first enterprise AI solution, reducing client's processing time by 80%."
-  },
-  {
-    year: "2022",
-    title: "Team Expansion",
-    description: "Grew our team to 25+ AI specialists and opened offices in San Francisco and New York."
-  },
-  {
-    year: "2023",
-    title: "100+ Projects",
-    description: "Reached the milestone of 100+ successful AI implementations across various industries."
-  },
-  {
-    year: "2024",
-    title: "Global Expansion",
-    description: "Expanded internationally with clients across North America, Europe, and Asia."
   }
 ]
 
@@ -178,47 +146,21 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Our Story */}
       <section className="section-padding">
         <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold font-heading mb-4">
-              Our <span className="gradient-text">Journey</span>
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold font-heading mb-6">
+              Our <span className="gradient-text">Story</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              From startup to industry leader, here's how we've grown and evolved.
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              callAI started as a small consulting practice in Toronto, helping local businesses explore
+              what AI could actually do for them — not the hype, but the practical stuff. Over time,
+              word spread. What began as one-off projects turned into longer partnerships, and our team
+              grew alongside the work. Today we focus on the same thing we did on day one: understanding
+              a business&apos;s real problems first, then building AI that solves them. No buzzwords, no
+              over-promises — just clear thinking and solid engineering.
             </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/20"></div>
-              
-              <div className="space-y-12">
-                {timeline.map((item, index) => (
-                  <motion.div
-                    key={item.year}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="relative flex items-start space-x-6"
-                  >
-                    {/* Timeline dot */}
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 relative z-10">
-                      <div className="w-8 h-8 rounded-full bg-primary"></div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <div className="text-2xl font-bold text-primary mb-2">{item.year}</div>
-                      <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{item.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -228,10 +170,10 @@ export default function AboutPage() {
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold font-heading mb-4">
-              Technology <span className="gradient-text">Partners</span>
+              Technologies We <span className="gradient-text">Use</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We work with leading AI and cloud providers to deliver the best solutions for our clients.
+              We work with leading AI and cloud platforms to deliver the best solutions for our clients.
             </p>
           </div>
           
@@ -347,7 +289,7 @@ export default function AboutPage() {
             <Button asChild size="lg" variant="secondary">
               <Link href="/contact">Start Your Project</Link>
             </Button>
-            <Button asChild size="lg" variant="ghost" className="text-primary-foreground border-primary-foreground/20 hover:bg-primary-foreground/10">
+            <Button asChild size="lg" variant="outline" className="text-white border-white/40 bg-white/10 hover:bg-white/20 hover:text-white">
               <Link href="/projects">View Our Work</Link>
             </Button>
           </div>

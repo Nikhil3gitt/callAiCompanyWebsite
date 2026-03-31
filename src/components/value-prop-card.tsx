@@ -9,6 +9,7 @@ import {
   Rocket,
   LucideIcon 
 } from "lucide-react"
+import Link from "next/link"
 
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -40,7 +41,7 @@ export function ValuePropCard({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-50px" }}
     >
       <Card className="h-full card-hover group">
         <CardContent className="p-6">
@@ -57,7 +58,7 @@ export function ValuePropCard({
               <p className="text-muted-foreground mb-4 leading-relaxed">
                 {description}
               </p>
-              <a
+              <Link
                 href={learnMoreHref}
                 className="text-sm font-medium text-primary hover:text-primary/80 transition-colors inline-flex items-center"
               >
@@ -75,7 +76,7 @@ export function ValuePropCard({
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </CardContent>

@@ -1,4 +1,4 @@
-﻿import { Hero } from "@/components/hero"
+import { Hero } from "@/components/hero"
 import { ValuePropCard } from "@/components/value-prop-card"
 import { ProjectCard } from "@/components/project-card"
 import {
@@ -262,7 +262,7 @@ export default function HomePage() {
                   <Button asChild size="lg" variant="secondary">
                     <Link href="/contact">Request Your AI Blueprint</Link>
                   </Button>
-                  <Button asChild size="lg" variant="ghost" className="text-primary-foreground border-primary-foreground/20 hover:bg-primary-foreground/10">
+                  <Button asChild size="lg" variant="outline" className="text-white border-white/40 bg-white/10 hover:bg-white/20 hover:text-white">
                     <Link href="/projects">See Our Work</Link>
                   </Button>
                 </div>
