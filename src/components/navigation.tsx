@@ -7,7 +7,6 @@ import { Menu, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Logo } from "@/components/logo"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { cn } from "@/lib/utils"
 
 const navigation = [
@@ -52,8 +51,6 @@ export function Navigation() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <ThemeToggle />
-
           <Button asChild className="hidden sm:inline-flex">
             <Link href="/contact">Get Started</Link>
           </Button>

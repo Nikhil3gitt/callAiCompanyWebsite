@@ -88,9 +88,7 @@ export default function PrivacyPage() {
                     If you have any questions about this Privacy Policy, please contact us at:
                   </p>
                   <div className="bg-muted p-4 rounded-lg">
-                    <p><strong>Email:</strong> privacy@callai.com</p>
-                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
-                    <p><strong>Address:</strong> 123 AI Street, San Francisco, CA 94105</p>
+                    <p><strong>Email:</strong> callai.jaypatel@gmail.com</p>
                   </div>
                 </div>
               </CardContent>
