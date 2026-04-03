@@ -390,8 +390,30 @@ export default function ContactPage() {
                       )}
                     </div>
                     <div>
-                      <label className="text-sm font-medium">Preferred time</label>
-                      <Input {...registerSchedule("time")} type="time" />
+                      <label className="text-sm font-medium">Preferred time (Eastern Time)</label>
+                      <select
+                        {...registerSchedule("time")}
+                        className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground"
+                      >
+                        <option value="" disabled>Select a time</option>
+                        <option value="9:00 AM ET">9:00 AM</option>
+                        <option value="9:30 AM ET">9:30 AM</option>
+                        <option value="10:00 AM ET">10:00 AM</option>
+                        <option value="10:30 AM ET">10:30 AM</option>
+                        <option value="11:00 AM ET">11:00 AM</option>
+                        <option value="11:30 AM ET">11:30 AM</option>
+                        <option value="12:00 PM ET">12:00 PM</option>
+                        <option value="12:30 PM ET">12:30 PM</option>
+                        <option value="1:00 PM ET">1:00 PM</option>
+                        <option value="1:30 PM ET">1:30 PM</option>
+                        <option value="2:00 PM ET">2:00 PM</option>
+                        <option value="2:30 PM ET">2:30 PM</option>
+                        <option value="3:00 PM ET">3:00 PM</option>
+                        <option value="3:30 PM ET">3:30 PM</option>
+                        <option value="4:00 PM ET">4:00 PM</option>
+                        <option value="4:30 PM ET">4:30 PM</option>
+                        <option value="5:00 PM ET">5:00 PM</option>
+                      </select>
                       {scheduleErrors.time && (
                         <p className="text-sm text-red-600 mt-1">
                           {scheduleErrors.time.message}
