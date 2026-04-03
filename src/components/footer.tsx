@@ -62,23 +62,6 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold">Stay Updated</h3>
-            <p className="text-sm text-muted-foreground">
-              Get the latest insights on AI adoption and automation.
-            </p>
-            <div className="space-y-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                aria-label="Email address for newsletter"
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-              />
-              <Button size="sm" className="w-full">
-                Subscribe
-              </Button>
-            </div>
-          </div>
         </div>
 
         <div className="mt-8 border-t pt-8">

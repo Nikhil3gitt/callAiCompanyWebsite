@@ -35,7 +35,7 @@ const values = [
 
 const stats = [
   {
-    number: "200+",
+    number: "30+",
     label: "AI Projects Delivered",
     description: "Successfully implemented across various industries"
   },
@@ -45,7 +45,7 @@ const stats = [
     description: "Based on post-project surveys"
   },
   {
-    number: "50+",
+    number: "15+",
     label: "Team Members",
     description: "AI specialists, engineers, and consultants"
   },
