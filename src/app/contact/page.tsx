@@ -56,7 +56,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    details: "contact.callaiservice@gmail.com",
+    details: "admin.callai@gmail.com",
     description: "We will respond within 24 hours",
   },
   {

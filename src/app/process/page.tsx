@@ -27,7 +27,8 @@ const processSteps = [
       "AI opportunity assessment", 
       "ROI projections",
       "Technical feasibility study",
-      "Implementation roadmap"
+      "Implementation roadmap",
+      "2-4 meetings with customer"
     ],
     duration: "1-2 weeks"
   },
